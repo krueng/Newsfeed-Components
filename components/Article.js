@@ -3,6 +3,31 @@
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
 const data = [
   {
+    title: 'Wilajah Keuradjeuen Atjeh',
+    date: 'Mar 15th, 1968',
+    firstParagraph: `Dalam hikajat Malém Dagang njang peugah riwajat prang Atjèh deungon
+    Portugéh bak thôn 1629, na geupeugah tjit bataih Keuradjeuen Atjèh bak watèë
+    njan, njang teudong nibak leubèh siteungoh pulo Sumatra: rot Timu trôh u Kruëng
+    Kampar, rot Tunong trôh u Bengkulèn. Seudang di Tanoh Meulaju, nanggroë
+    Djohor, Phang, Pirak, Keudah dan Perlis rôh dalarn wilajah Keuradjeuën Atjèh tjit.
+    Laén nibak buku Malém Dagang njan goh lom na ta teumeung buku Atjèh njang
+    peugah peukara bataih Keuradjaan Atjèh. Teutapi sjukô keu Tuhan, peuë njang
+    geutanjoë Atjèh keudroë teuh ka tuwo bak ta tuléh, atawa ka na teutuléh teutapi ka
+    gadoh dalam awo, ka gob thèë na ban saboh dônja dan ka gob tuléh dalam sigala
+    basa.`,
+
+    secondParagraph: `Bataih njang ka geupeunjata dalam hikajat Malem Dagang njan ka djipeusah
+    tjit dalam kitab Djeureuman, Meyers groszes Lexikons, lagèë njoë:`,
+
+    thirdParagraph: `
+    Bak phôn abad keu 17, watèë Keuradjaan Atjèh njang mulai teudong
+    deungon raja bak abad keu 16, na bak putjak keubeusarandjih, luwaih
+    wilajah Keuradjaannjan di panté Barat pulo Sumatra trôh u Bengkulen
+    dan dibagian Timu Sumatra trôih u Kampar, seudang saboh bagian tanoh
+    njang toê deungon njan, dan Tanoh Seumeunandjong Meulaju na tanoh
+    djadjahan Atjèh.*`
+  },
+  {
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
     firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
@@ -86,6 +111,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: ' ما هو لوريم ايبسوم',
+    date: 'Sept 1st, 2021',
+    firstParagraph: `لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...`,
+
+    secondParagraph: `وعند موافقه العميل المبدئيه على التصميم يتم ازالة هذا النص من التصميم ويتم وضع النصوص النهائية المطلوبة للتصميم ويقول البعض ان وضع النصوص التجريبية بالتصميم قد تشغل المشاهد عن وضع الكثير من الملاحظات او الانتقادات للتصميم الاساسي.`,
+
+    thirdParagraph: `وخلافاَ للاعتقاد السائد فإن لوريم إيبسوم ليس نصاَ عشوائياً، بل إن له جذور في الأدب اللاتيني الكلاسيكي منذ العام 45 قبل الميلاد. من كتاب "حول أقاصي الخير والشر`
   }
 ];
 
@@ -114,3 +148,52 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+function articleMaker({ title, date, firstParagraph, secondParagraph, thirdParagraph }) {
+  const divRtcl = document.createElement('div');
+  const hTitle = document.createElement('h2');
+  const pDate = document.createElement('p');
+  const spanExpnBtn = document.createElement('span');
+  const firstPara = document.createElement('p');
+  const secondPara = document.createElement('p');
+  const thirdPara = document.createElement('p');
+
+  //structure like HTML
+  divRtcl.appendChild(hTitle);
+  divRtcl.appendChild(pDate);
+  divRtcl.appendChild(spanExpnBtn);
+  divRtcl.appendChild(firstPara);
+  divRtcl.appendChild(secondPara);
+  divRtcl.appendChild(thirdPara);
+
+  //classes
+  divRtcl.classList.add('article');
+  pDate.classList.add('date');
+  spanExpnBtn.classList.add('expandButton');
+
+  //assigning
+  hTitle.textContent = title;
+  pDate.textContent = date;
+  spanExpnBtn.textContent = '↕️';
+  firstPara.textContent = firstParagraph;
+  secondPara.textContent = secondParagraph;
+  thirdPara.textContent = thirdParagraph;
+
+  //eventListener
+  spanExpnBtn.addEventListener('click', () => {
+    divRtcl.classList.toggle('article-open');
+  });
+
+  return divRtcl;
+
+}
+//DOM selector
+const displyRtcl = document.querySelector('.articles');
+
+//loop over the data, create a new array.
+const rtclData = data.map(e => {
+  return articleMaker(e);
+})
+//appends each iteration
+rtclData.forEach(e => {
+  displyRtcl.appendChild(e);
+})
