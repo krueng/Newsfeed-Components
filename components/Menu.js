@@ -46,11 +46,23 @@ function menuMaker(arrMenu) {
   });
 
   const selMenuBtn = document.querySelector('.menu-button');
-  selMenuBtn.addEventListener('click', e => {
+  
+  selMenuBtn.addEventListener('click', () => {
     divMenu.classList.toggle('menu--open');
+    document.querySelector('.menu').style.width = "350px";
   })
+
   return divMenu;
 }
 
 const header = document.querySelector('.header');
 header.appendChild(menuMaker(menuItems));
+
+
+document.querySelector('.menu').addEventListener('click', () => {
+  // if (document.getElementsByClassName('menu--open').length == 0){
+    // alert(document.querySelector('.menu').style.width)
+    // alert(document.getElementsByClassName('menu--open').length)
+    document.querySelector('.menu').style.width = "0";
+  // }
+ })
